@@ -4,17 +4,28 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
 
 <MinimalLayout title="Suchintha Hettiarachchi">
   
-  <!-- PREMIUM SPLIT-SCREEN LOADER -->
+  <!-- 3D ORBITING LANGUAGES LOADER -->
   <div class="loader" id="loader">
-    <!-- Text that animates in first -->
-    <div class="loader-inner">
-      <h2 class="loader-name">SUCHINTHA</h2>
-      <h2 class="loader-name outline">HETTIARACHCHI</h2>
-      <div class="loader-line"></div>
+    <div class="loader-scene">
+      <!-- Center Initials -->
+      <div class="loader-center">SH</div>
+      
+      <!-- Inner Ring (Rotates Clockwise) -->
+      <div class="orbit orbit-inner">
+        <div class="orbit-icon" style="--i:0">JS</div>
+        <div class="orbit-icon" style="--i:1">TS</div>
+        <div class="orbit-icon" style="--i:2">PY</div>
+        <div class="orbit-icon" style="--i:3">C++</div>
+      </div>
+
+      <!-- Outer Ring (Rotates Counter-Clockwise) -->
+      <div class="orbit orbit-outer">
+        <div class="orbit-icon outer" style="--i:0">REACT</div>
+        <div class="orbit-icon outer" style="--i:1">NODE</div>
+        <div class="orbit-icon outer" style="--i:2">CSS</div>
+        <div class="orbit-icon outer" style="--i:3">HTML</div>
+      </div>
     </div>
-    <!-- The two halves that will split apart -->
-    <div class="loader-half top"></div>
-    <div class="loader-half bottom"></div>
   </div>
 
   <main class="home-container" id="mainContent">
@@ -22,30 +33,30 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     <div class="home-ambient"></div>
 
     <div class="home-content">
-      <p class="home-tag code-font load-anim" style="--d: 2.6s">// PORTFOLIO</p>
+      <p class="home-tag code-font load-anim" style="--d: 0.2s">// PORTFOLIO</p>
       
       <h1 class="mega-name">
-        <span class="name-first load-anim" style="--d: 2.8s">SUCHINTHA</span><br/>
-        <span class="name-last load-anim" style="--d: 3.1s">HETTIARACHCHI</span>
+        <span class="name-first load-anim" style="--d: 0.4s">SUCHINTHA</span><br/>
+        <span class="name-last load-anim" style="--d: 0.6s">HETTIARACHCHI</span>
       </h1>
       
-      <p class="home-role load-anim" style="--d: 3.4s">DEVELOPER & FILMMAKER</p>
+      <p class="home-role load-anim" style="--d: 0.8s">DEVELOPER & FILMMAKER</p>
     </div>
 
     <div class="home-links">
-      <a href="/stack" class="home-link stack-link load-anim" style="--d: 3.7s">
+      <a href="/stack" class="home-link stack-link load-anim" style="--d: 1.0s">
         <span class="link-number code-font">01</span>
         <span class="link-text">Enter Stack</span>
         <span class="link-arrow">→</span>
       </a>
       
-      <a href="/frame" class="home-link frame-link load-anim" style="--d: 3.9s">
+      <a href="/frame" class="home-link frame-link load-anim" style="--d: 1.2s">
         <span class="link-number code-font">02</span>
         <span class="link-text">Enter Frame</span>
         <span class="link-arrow">→</span>
       </a>
 
-      <a href="/contact" class="home-link contact-link load-anim" style="--d: 4.1s">
+      <a href="/contact" class="home-link contact-link load-anim" style="--d: 1.4s">
         <span class="link-number code-font">03</span>
         <span class="link-text">Contact</span>
         <span class="link-arrow">→</span>
@@ -56,7 +67,7 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
 </MinimalLayout>
 
 <style>
-  /* ── 1. PREMIUM LOADER SYSTEM ── */
+  /* ── 1. ORBITING LOADER ── */
   .loader {
     position: fixed;
     inset: 0;
@@ -65,71 +76,107 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
   }
 
-  .loader-inner {
-    position: relative;
-    z-index: 2;
-    text-align: center;
+  .loader.out {
     opacity: 0;
-    transform: translateY(20px);
-    animation: loaderTextIn 0.8s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    visibility: hidden;
   }
 
-  .loader-name {
+  .loader-scene {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    perspective: 800px;
+  }
+
+  /* Center Text */
+  .loader-center {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(2rem, 6vw, 5rem);
+    font-size: 4rem;
     font-weight: 800;
-    line-height: 1;
     color: #fff;
+    z-index: 2;
     letter-spacing: -0.02em;
-    margin: 0;
   }
 
-  .loader-name.outline {
-    -webkit-text-stroke: 1.5px #c9a84c;
-    color: transparent;
-    margin-top: 0.2rem;
-  }
-
-  .loader-line {
-    width: 0;
-    height: 1px;
-    background: #c9a84c;
-    margin: 1.5rem auto 0;
-    animation: lineExpand 0.6s 1.4s cubic-bezier(0.76, 0, 0.24, 1) forwards;
-  }
-
-  /* The Splitting Halves */
-  .loader-half {
+  /* The Ring Containers */
+  .orbit {
     position: absolute;
-    left: 0;
     width: 100%;
-    height: 50%;
-    background: #000;
-    z-index: 1;
-    transition: transform 1s 2s cubic-bezier(0.76, 0, 0.24, 1);
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .loader-half.top { top: 0; }
-  .loader-half.bottom { bottom: 0; }
-
-  /* Trigger the split */
-  .loader.out .loader-half.top { transform: translateY(-100%); }
-  .loader.out .loader-half.bottom { transform: translateY(100%); }
-  
-  /* Fade out the text right before it splits */
-  .loader.out .loader-inner {
-    animation: loaderTextOut 0.4s 1.8s ease forwards;
+  /* Rotate the rings */
+  .orbit-inner {
+    animation: spin 8s linear infinite;
   }
 
-  @keyframes loaderTextIn { to { opacity: 1; transform: translateY(0); } }
-  @keyframes loaderTextOut { to { opacity: 0; transform: translateY(-10px); } }
-  @keyframes lineExpand { to { width: 100px; } }
+  .orbit-outer {
+    width: 140%;
+    height: 140%;
+    animation: spin-reverse 12s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg) rotateX(65deg); }
+    to { transform: rotate(360deg) rotateX(65deg); }
+  }
+
+  @keyframes spin-reverse {
+    from { transform: rotate(0deg) rotateX(65deg); }
+    to { transform: rotate(-360deg) rotateX(65deg); }
+  }
+
+  /* The Individual Language Tags */
+  .orbit-icon {
+    position: absolute;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #c9a84c; /* Amber */
+    background: rgba(201, 168, 76, 0.1);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    /* Pushes them out to the edge of the circle */
+    transform: rotate(calc(var(--i) * 90deg)) translateX(110px) rotateX(-65deg);
+    /* Counter-rotate to keep text flat */
+    animation: counter-spin 8s linear infinite;
+    backdrop-filter: blur(4px);
+  }
+
+  .orbit-icon.outer {
+    color: #2d8a8a; /* Teal */
+    background: rgba(45, 138, 138, 0.1);
+    border-color: rgba(45, 138, 138, 0.3);
+    /* Pushed out further for the bigger ring */
+    transform: rotate(calc(var(--i) * 90deg)) translateX(150px) rotateX(-65deg);
+    animation: counter-spin-reverse 12s linear infinite;
+  }
+
+  @keyframes counter-spin {
+    from { transform: rotate(calc(var(--i) * 90deg)) translateX(110px) rotateX(-65deg) rotate(0deg); }
+    to { transform: rotate(calc(var(--i) * 90deg)) translateX(110px) rotateX(-65deg) rotate(-360deg); }
+  }
+
+  @keyframes counter-spin-reverse {
+    from { transform: rotate(calc(var(--i) * 90deg)) translateX(150px) rotateX(-65deg) rotate(0deg); }
+    to { transform: rotate(calc(var(--i) * 90deg)) translateX(150px) rotateX(-65deg) rotate(360deg); }
+  }
 
 
-  /* ── 2. MAIN HOMEPAGE (Hidden until loader splits) ── */
+  /* ── 2. MAIN HOMEPAGE ── */
   .home-container {
     min-height: 100vh;
     display: flex;
@@ -138,16 +185,12 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     padding: 15vh 6vw 5vh 6vw;
     position: relative;
     overflow: hidden;
-    /* Starts slightly zoomed in and invisible */
     opacity: 0;
-    transform: scale(0.98);
-    transition: opacity 0.8s 2.2s ease, transform 1.2s 2.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.8s 0.2s ease;
   }
 
-  /* Triggered by JS when loader finishes */
   .home-container.revealed {
     opacity: 1;
-    transform: scale(1);
   }
 
   .home-ambient {
@@ -195,7 +238,7 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     text-transform: uppercase;
   }
 
-  /* Staggered Text Animation (Delayed to happen AFTER loader opens) */
+  /* Staggered Text Animation */
   .load-anim {
     opacity: 0;
     transform: translateY(40px);
@@ -250,24 +293,23 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
 </style>
 
 <script>
-  // Controls the exact timing of the premium loader
   const loader = document.getElementById('loader');
   const mainContent = document.getElementById('mainContent');
 
-  // 1. Wait 2 seconds to let the text animate and line expand
+  // Let the orbit animation play for 2.5 seconds
   setTimeout(() => {
-    // 2. Add 'out' class to trigger the screen split
+    // Fade out the 3D loader
     loader.classList.add('out');
     
-    // 3. Slightly after the split starts, reveal the main content underneath
+    // Reveal the main homepage
     setTimeout(() => {
       mainContent.classList.add('revealed');
     }, 200);
 
-    // 4. Completely remove the loader from the DOM once it's off-screen
+    // Remove loader from DOM completely
     setTimeout(() => {
       loader.style.display = 'none';
-    }, 3200); // Matches the 2s delay + 1s transition duration + buffer
+    }, 1000);
 
-  }, 2000);
+  }, 2500);
 </script>
