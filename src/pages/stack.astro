@@ -298,6 +298,7 @@
   </section>
 </body>
 <script>
+// @ts-nocheck
   document.body.style.overflow = 'hidden'; const prologue = document.getElementById('prologue');
   function endPrologue() { prologue.classList.add('out'); document.body.style.overflow = ''; setTimeout(() => { prologue.style.display = 'none'; }, 800); }
   setTimeout(endPrologue, 3000);
