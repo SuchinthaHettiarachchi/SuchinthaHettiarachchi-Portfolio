@@ -1,0 +1,77 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <!-- Keeping your awesome font choices -->
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  </head>
+  <body>
+    
+    <!-- Minimal Top Right Nav -->
+    <nav class="minimal-nav">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/stack" class="nav-link">Stack</a>
+      <a href="/frame" class="nav-link">Frame</a>
+      <a href="/contact" class="nav-link">Contact</a>
+    </nav>
+
+    <!-- Where page content goes -->
+    <slot />
+
+  </body>
+</html>
+
+<style is:global>
+  /* Global Reset & Base Styles */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Syne', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .code-font { font-family: 'JetBrains Mono', monospace; }
+
+  /* Navigation */
+  .minimal-nav {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 100;
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    color: #444444; /* Muted grey */
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: #ffffff;
+  }
+
+  /* Dynamically highlight the current page green */
+  .nav-link[href="${currentPath}"] {
+    color: #00ff66; 
+  }
+</style>
