@@ -4,39 +4,48 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
 
 <MinimalLayout title="Suchintha Hettiarachchi">
   
-  <!-- Quick Black Loader Screen -->
-  <div class="page-loader" id="pageLoader"></div>
+  <!-- PREMIUM SPLIT-SCREEN LOADER -->
+  <div class="loader" id="loader">
+    <!-- Text that animates in first -->
+    <div class="loader-inner">
+      <h2 class="loader-name">SUCHINTHA</h2>
+      <h2 class="loader-name outline">HETTIARACHCHI</h2>
+      <div class="loader-line"></div>
+    </div>
+    <!-- The two halves that will split apart -->
+    <div class="loader-half top"></div>
+    <div class="loader-half bottom"></div>
+  </div>
 
-  <main class="home-container">
+  <main class="home-container" id="mainContent">
     
-    <!-- Subtle Color Ambient Glow -->
     <div class="home-ambient"></div>
 
     <div class="home-content">
-      <p class="home-tag code-font load-anim" style="--d: 0.2s">// PORTFOLIO</p>
+      <p class="home-tag code-font load-anim" style="--d: 2.6s">// PORTFOLIO</p>
       
       <h1 class="mega-name">
-        <span class="name-first load-anim" style="--d: 0.5s">SUCHINTHA</span><br/>
-        <span class="name-last load-anim" style="--d: 0.8s">HETTIARACHCHI</span>
+        <span class="name-first load-anim" style="--d: 2.8s">SUCHINTHA</span><br/>
+        <span class="name-last load-anim" style="--d: 3.1s">HETTIARACHCHI</span>
       </h1>
       
-      <p class="home-role load-anim" style="--d: 1.1s">DEVELOPER & FILMMAKER</p>
+      <p class="home-role load-anim" style="--d: 3.4s">DEVELOPER & FILMMAKER</p>
     </div>
 
     <div class="home-links">
-      <a href="/stack" class="home-link stack-link load-anim" style="--d: 1.4s">
+      <a href="/stack" class="home-link stack-link load-anim" style="--d: 3.7s">
         <span class="link-number code-font">01</span>
         <span class="link-text">Enter Stack</span>
         <span class="link-arrow">→</span>
       </a>
       
-      <a href="/frame" class="home-link frame-link load-anim" style="--d: 1.6s">
+      <a href="/frame" class="home-link frame-link load-anim" style="--d: 3.9s">
         <span class="link-number code-font">02</span>
         <span class="link-text">Enter Frame</span>
         <span class="link-arrow">→</span>
       </a>
 
-      <a href="/contact" class="home-link contact-link load-anim" style="--d: 1.8s">
+      <a href="/contact" class="home-link contact-link load-anim" style="--d: 4.1s">
         <span class="link-number code-font">03</span>
         <span class="link-text">Contact</span>
         <span class="link-arrow">→</span>
@@ -47,20 +56,80 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
 </MinimalLayout>
 
 <style>
-  /* ── LOADER SCREEN ── */
-  .page-loader {
+  /* ── 1. PREMIUM LOADER SYSTEM ── */
+  .loader {
     position: fixed;
     inset: 0;
-    background: #000000;
-    z-index: 999;
-    pointer-events: none;
-    animation: loaderFade 0.6s 0.3s forwards;
-  }
-  @keyframes loaderFade {
-    to { opacity: 0; visibility: hidden; }
+    z-index: 9999;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
 
-  /* ── LAYOUT ── */
+  .loader-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: loaderTextIn 0.8s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .loader-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .loader-name.outline {
+    -webkit-text-stroke: 1.5px #c9a84c;
+    color: transparent;
+    margin-top: 0.2rem;
+  }
+
+  .loader-line {
+    width: 0;
+    height: 1px;
+    background: #c9a84c;
+    margin: 1.5rem auto 0;
+    animation: lineExpand 0.6s 1.4s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  }
+
+  /* The Splitting Halves */
+  .loader-half {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #000;
+    z-index: 1;
+    transition: transform 1s 2s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  .loader-half.top { top: 0; }
+  .loader-half.bottom { bottom: 0; }
+
+  /* Trigger the split */
+  .loader.out .loader-half.top { transform: translateY(-100%); }
+  .loader.out .loader-half.bottom { transform: translateY(100%); }
+  
+  /* Fade out the text right before it splits */
+  .loader.out .loader-inner {
+    animation: loaderTextOut 0.4s 1.8s ease forwards;
+  }
+
+  @keyframes loaderTextIn { to { opacity: 1; transform: translateY(0); } }
+  @keyframes loaderTextOut { to { opacity: 0; transform: translateY(-10px); } }
+  @keyframes lineExpand { to { width: 100px; } }
+
+
+  /* ── 2. MAIN HOMEPAGE (Hidden until loader splits) ── */
   .home-container {
     min-height: 100vh;
     display: flex;
@@ -69,6 +138,16 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     padding: 15vh 6vw 5vh 6vw;
     position: relative;
     overflow: hidden;
+    /* Starts slightly zoomed in and invisible */
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 0.8s 2.2s ease, transform 1.2s 2.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Triggered by JS when loader finishes */
+  .home-container.revealed {
+    opacity: 1;
+    transform: scale(1);
   }
 
   .home-ambient {
@@ -83,10 +162,7 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     z-index: 0;
   }
 
-  .home-content {
-    position: relative;
-    z-index: 1;
-  }
+  .home-content { position: relative; z-index: 1; }
 
   .home-tag {
     font-size: 0.8rem;
@@ -103,10 +179,7 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     margin-bottom: 2rem;
   }
 
-  .name-first {
-    color: #ffffff;
-    display: block;
-  }
+  .name-first { color: #ffffff; display: block; }
 
   .name-last {
     -webkit-text-stroke: 2px #c9a84c; 
@@ -122,23 +195,16 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     text-transform: uppercase;
   }
 
-  /* ── STAGGERED LOAD ANIMATION ── */
+  /* Staggered Text Animation (Delayed to happen AFTER loader opens) */
   .load-anim {
-    /* Starts hidden and pushed down */
     opacity: 0;
     transform: translateY(40px);
-    /* Uses the --d variable for delay, set in the HTML */
     animation: smoothReveal 1s cubic-bezier(0.16, 1, 0.3, 1) var(--d) forwards;
   }
 
-  @keyframes smoothReveal {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  @keyframes smoothReveal { to { opacity: 1; transform: translateY(0); } }
 
-  /* ── MENU LINKS ── */
+  /* ── 3. MENU LINKS ── */
   .home-links {
     margin-top: 8rem;
     display: flex;
@@ -160,49 +226,48 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     transition: all 0.3s ease;
   }
 
-  .link-number {
-    font-size: 0.7rem;
-    color: #333333;
-    transition: color 0.3s ease;
-  }
-
-  .link-text {
-    font-size: 1.5rem;
-    font-weight: 700;
-    flex: 1;
-    transition: all 0.3s ease;
-  }
-
-  .link-arrow {
-    font-size: 1.5rem;
-    color: #333333;
-    transition: all 0.3s ease;
-  }
+  .link-number { font-size: 0.7rem; color: #333333; transition: color 0.3s ease; }
+  .link-text { font-size: 1.5rem; font-weight: 700; flex: 1; transition: all 0.3s ease; }
+  .link-arrow { font-size: 1.5rem; color: #333333; transition: all 0.3s ease; }
 
   /* Stack Hover (Teal) */
-  .home-link.stack-link:hover {
-    padding-left: 1rem;
-    border-bottom-color: #2d8a8a;
-  }
+  .home-link.stack-link:hover { padding-left: 1rem; border-bottom-color: #2d8a8a; }
   .home-link.stack-link:hover .link-arrow { transform: translateX(5px); color: #2d8a8a; }
   .home-link.stack-link:hover .link-text { color: #2d8a8a; }
   .home-link.stack-link:hover .link-number { color: #2d8a8a; }
 
   /* Frame Hover (Amber) */
-  .home-link.frame-link:hover {
-    padding-left: 1rem;
-    border-bottom-color: #c9a84c;
-  }
+  .home-link.frame-link:hover { padding-left: 1rem; border-bottom-color: #c9a84c; }
   .home-link.frame-link:hover .link-arrow { transform: translateX(5px); color: #c9a84c; }
   .home-link.frame-link:hover .link-text { color: #c9a84c; }
   .home-link.frame-link:hover .link-number { color: #c9a84c; }
 
   /* Contact Hover (Green) */
-  .home-link.contact-link:hover {
-    padding-left: 1rem;
-    border-bottom-color: #00ff66;
-  }
+  .home-link.contact-link:hover { padding-left: 1rem; border-bottom-color: #00ff66; }
   .home-link.contact-link:hover .link-arrow { transform: translateX(5px); color: #00ff66; }
   .home-link.contact-link:hover .link-text { color: #00ff66; }
   .home-link.contact-link:hover .link-number { color: #00ff66; }
 </style>
+
+<script>
+  // Controls the exact timing of the premium loader
+  const loader = document.getElementById('loader');
+  const mainContent = document.getElementById('mainContent');
+
+  // 1. Wait 2 seconds to let the text animate and line expand
+  setTimeout(() => {
+    // 2. Add 'out' class to trigger the screen split
+    loader.classList.add('out');
+    
+    // 3. Slightly after the split starts, reveal the main content underneath
+    setTimeout(() => {
+      mainContent.classList.add('revealed');
+    }, 200);
+
+    // 4. Completely remove the loader from the DOM once it's off-screen
+    setTimeout(() => {
+      loader.style.display = 'none';
+    }, 3200); // Matches the 2s delay + 1s transition duration + buffer
+
+  }, 2000);
+</script>
