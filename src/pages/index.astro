@@ -36,23 +36,29 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     .loader.out { opacity: 0; visibility: hidden; pointer-events: none; }
     .loader-initials {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(5rem, 15vw, 12rem);
-      letter-spacing: 0.15em;
+      font-size: clamp(3rem, 10vw, 8rem);
+      letter-spacing: 0.08em;
       color: var(--text);
       margin-bottom: 3rem;
       display: flex;
-      gap: 0.05em;
+      gap: 0.02em;
       overflow: hidden;
     }
     .loader-initials span {
       display: inline-block;
       opacity: 0;
       transform: translateY(100%) rotateX(-80deg);
-      animation: letterIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: letterIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     .loader-initials span:nth-child(1) { animation-delay: 0.1s; }
-    .loader-initials span:nth-child(2) { animation-delay: 0.25s; }
-    .loader-initials span:nth-child(3) { animation-delay: 0.4s; }
+    .loader-initials span:nth-child(2) { animation-delay: 0.16s; }
+    .loader-initials span:nth-child(3) { animation-delay: 0.22s; }
+    .loader-initials span:nth-child(4) { animation-delay: 0.28s; }
+    .loader-initials span:nth-child(5) { animation-delay: 0.34s; }
+    .loader-initials span:nth-child(6) { animation-delay: 0.4s; }
+    .loader-initials span:nth-child(7) { animation-delay: 0.46s; }
+    .loader-initials span:nth-child(8) { animation-delay: 0.52s; }
+    .loader-initials span:nth-child(9) { animation-delay: 0.58s; }
     @keyframes letterIn {
       0% { opacity: 0; transform: translateY(100%) rotateX(-80deg); }
       60% { opacity: 1; transform: translateY(-5%) rotateX(5deg); }
