@@ -36,12 +36,27 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     .loader.out { opacity: 0; visibility: hidden; pointer-events: none; }
     .loader-initials {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      letter-spacing: 0.3em;
+      font-size: clamp(5rem, 15vw, 12rem);
+      letter-spacing: 0.15em;
       color: var(--text);
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
+      display: flex;
+      gap: 0.05em;
+      overflow: hidden;
+    }
+    .loader-initials span {
+      display: inline-block;
       opacity: 0;
-      animation: fadeUp 0.6s 0.2s forwards;
+      transform: translateY(100%) rotateX(-80deg);
+      animation: letterIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .loader-initials span:nth-child(1) { animation-delay: 0.1s; }
+    .loader-initials span:nth-child(2) { animation-delay: 0.25s; }
+    .loader-initials span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes letterIn {
+      0% { opacity: 0; transform: translateY(100%) rotateX(-80deg); }
+      60% { opacity: 1; transform: translateY(-5%) rotateX(5deg); }
+      100% { opacity: 1; transform: translateY(0) rotateX(0); }
     }
     .loader-track {
       width: clamp(200px, 40vw, 400px);
@@ -50,6 +65,8 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
       position: relative;
       overflow: hidden;
       margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.6s forwards;
     }
     .loader-fill {
       position: absolute; top: 0; left: 0;
@@ -63,7 +80,7 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
       letter-spacing: 0.25em;
       color: var(--muted);
       opacity: 0;
-      animation: fadeUp 0.6s 0.4s forwards;
+      animation: fadeUp 0.5s 0.7s forwards;
     }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(8px); }
@@ -94,8 +111,6 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     .hero-grad { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(242,237,230,0.6) 0%, rgba(242,237,230,0) 35%, rgba(242,237,230,0.4) 75%, rgba(242,237,230,1) 100%); z-index: 1; }
     .hero-ambient { position: absolute; top: 30%; left: 45%; width: 50vw; height: 50vw; transform: translate(-50%, -50%); background: radial-gradient(circle, rgba(196,149,106,0.06) 0%, transparent 70%); z-index: 1; pointer-events: none; }
     #dustCanvas { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-    .grain { position: absolute; inset: -50%; width: 200%; height: 200%; opacity: 0.03; pointer-events: none; z-index: 3; filter: invert(0); background-size: 256px; animation: gShift 0.4s steps(2) infinite; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-    @keyframes gShift { 0% { transform: translate(0,0); } 50% { transform: translate(-2px,2px); } 100% { transform: translate(1px,-1px); } }
     .hero-inv { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: clamp(4rem, 12vw, 10rem); letter-spacing: 0.1em; color: rgba(42,36,32,0.025); z-index: 1; pointer-events: none; user-select: none; top: 15%; }
 
     .hero-content { position: relative; z-index: 4; text-align: center; padding: 2rem; }
@@ -209,7 +224,7 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     }
   </style>
   <div class="loader" id="loader">
-    <div class="loader-initials">SSH</div>
+    <div class="loader-initials"><span>S</span><span>S</span><span>H</span></div>
     <div class="loader-track">
       <div class="loader-fill" id="loaderFill"></div>
     </div>
@@ -235,7 +250,6 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     <div class="hero-grad"></div>
     <div class="hero-ambient"></div>
     <canvas id="dustCanvas"></canvas>
-    <div class="grain"></div>
     <div class="hero-inv">SYS.ROOT</div>
     <div class="hud hud-fr"><div class="hl">LINES</div><div class="nm" id="lineCount">000000</div></div>
     <div class="hud hud-cl"><span class="tm" id="clock">00:00:00</span></div>
