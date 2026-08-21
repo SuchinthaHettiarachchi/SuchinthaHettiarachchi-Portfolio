@@ -210,6 +210,25 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     .footer-line a:hover { color: var(--teal); }
 
     @media (max-width: 768px) {
+      .contact-title { font-size: clamp(2.5rem, 9vw, 5rem); margin-bottom: 1.8rem; }
+      .contact-email { font-size: clamp(0.6rem, 1.4vw, 0.85rem); margin-bottom: 2rem; padding-bottom: 0.4rem; word-break: break-all; }
+      .contact-inner { margin-bottom: 3rem; }
+      .contact-socials a { font-size: 0.5rem; padding: 0.4rem 0; margin-bottom: 0.4rem; }
+      .footer-line { font-size: 0.45rem; padding-top: 1.8rem; }
+      .s-label { font-size: 0.5rem; letter-spacing: 0.3em; margin-bottom: 1.8rem; }
+      .about-inner { padding-left: 1rem; }
+      .about-inner::before { left: -0.5rem; width: 1.5px; }
+      .about-title { font-size: clamp(2.5rem, 9vw, 4.5rem); margin-bottom: 1.8rem; }
+      .about-text { font-size: 0.9rem; line-height: 1.8; }
+      .about-stats { margin-top: 2.5rem; padding-top: 2rem; }
+      .stat-n { font-size: 2rem; }
+      .work-info { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.2rem 1.3rem; }
+      .work-item { border-radius: 12px; }
+      .work-thumb { aspect-ratio: 4/3; }
+      .work-info h3 { font-size: 0.95rem; }
+      .work-tag { font-size: 0.5rem; }
+      .rv { transform: translateY(30px); }
+    }
       nav { padding: 1.2rem 1.5rem; }
       nav.scrolled { padding: 0.8rem 1.5rem; }
       .nav-links { gap: 1.2rem; }
@@ -245,6 +264,32 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
       .nav-logo { font-size: 1.1rem; }
       .work-grid { grid-template-columns: 1fr; }
       .work-item.large .work-thumb { aspect-ratio: 16/9; }
+      .loader-initials { font-size: clamp(2rem, 11vw, 4rem); }
+      .loader-track { width: clamp(120px, 60vw, 250px); }
+      .loader-pct { font-size: 0.55rem; letter-spacing: 0.2em; }
+      .about-title { font-size: clamp(2rem, 8vw, 3.5rem); }
+      .about-text { font-size: 0.85rem; }
+      .contact-title { font-size: clamp(2rem, 8vw, 3.5rem); }
+      .contact-email { font-size: 0.65rem; }
+      .contact-socials a { font-size: 0.45rem; letter-spacing: 0.15em; }
+      .work-info h3 { font-size: 0.85rem; }
+      .work-tag { font-size: 0.45rem; padding: 0.2rem 0.5rem; }
+      .stat-n { font-size: 1.8rem; }
+      .stat-l { font-size: 0.45rem; }
+      .sdiv { margin: 0 1.5rem; }
+      #about { padding: 6rem 1.2rem; }
+      #work { padding: 4rem 1.2rem; }
+      #contact { padding: 6rem 1.2rem 1.5rem; }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .hero-btn::before { transition: none; }
+      .work-item { transition: none; }
+      .wt-bg { transition: none; }
+      .work-info h3 { transition: none; }
+      .contact-email { transition: none; }
+      .contact-socials a { transition: none; }
+      .contact-socials a::after { transition: none; }
     }
   </style>
   <div class="loader" id="loader">
