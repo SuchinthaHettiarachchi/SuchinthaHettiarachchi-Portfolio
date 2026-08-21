@@ -211,10 +211,23 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
 
     @media (max-width: 768px) {
       nav { padding: 1.2rem 1.5rem; }
-      nav.scrolled { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1.5rem; }
+      nav.scrolled { padding: 0.8rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav-link { font-size: 0.55rem; letter-spacing: 0.15em; }
       .hud-fr, .hud-cl, .hud-snd { display: none; }
-      .lb { height: 4vh; }
+      .lb { height: 3vh; }
+      .hero-label { font-size: 0.5rem; letter-spacing: 0.3em; margin-bottom: 1.2rem; }
+      .hero-title { letter-spacing: 0.01em; margin-bottom: 1.2rem; }
+      .hero-sub { font-size: 0.75rem; letter-spacing: 0.15em; margin-bottom: 2rem; }
+      .hero-btn { padding: 0.7rem 2rem; font-size: 0.55rem; letter-spacing: 0.2em; }
+      .scroll-hint { bottom: calc(3vh + 1rem); }
+      .hero-inv { display: none; }
+      .dev-grid-bg { background-size: 30px 30px; }
+      .loader-initials { font-size: clamp(2.5rem, 12vw, 5rem); letter-spacing: 0.06em; margin-bottom: 2rem; }
+      .loader-track { width: clamp(150px, 50vw, 300px); }
+      .loader-pct { font-size: 0.6rem; }
+      .cur-dot, .cur-ring { display: none; }
+      body { cursor: auto; }
       #about { padding: 8rem 1.5rem; }
       .wm { display: none; }
       #work { padding: 6rem 1.5rem; }
@@ -224,9 +237,14 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
       .contact-socials { flex-direction: column; }
       .contact-socials a { margin-right: 0; margin-bottom: 0.5rem; }
       .footer-line { flex-direction: column; gap: 0.75rem; text-align: center; }
-      .cur-dot, .cur-ring { display: none; }
-      body { cursor: auto; }
-      .hero-inv { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { line-height: 0.9; }
+      .hero-label { font-size: 0.45rem; }
+      .nav-logo { font-size: 1.1rem; }
+      .work-grid { grid-template-columns: 1fr; }
+      .work-item.large .work-thumb { aspect-ratio: 16/9; }
     }
   </style>
   <div class="loader" id="loader">
