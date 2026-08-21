@@ -210,6 +210,20 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     .footer-line a:hover { color: var(--teal); }
 
     @media (max-width: 768px) {
+      .s-label { font-size: 0.5rem; letter-spacing: 0.3em; margin-bottom: 1.8rem; }
+      .about-inner { padding-left: 1rem; }
+      .about-inner::before { left: -0.5rem; width: 1.5px; }
+      .about-title { font-size: clamp(2.5rem, 9vw, 4.5rem); margin-bottom: 1.8rem; }
+      .about-text { font-size: 0.9rem; line-height: 1.8; }
+      .about-stats { margin-top: 2.5rem; padding-top: 2rem; }
+      .stat-n { font-size: 2rem; }
+      .work-info { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.2rem 1.3rem; }
+      .work-item { border-radius: 12px; }
+      .work-thumb { aspect-ratio: 4/3; }
+      .work-info h3 { font-size: 0.95rem; }
+      .work-tag { font-size: 0.5rem; }
+      .rv { transform: translateY(30px); }
+    }
       nav { padding: 1.2rem 1.5rem; }
       nav.scrolled { padding: 0.8rem 1.5rem; }
       .nav-links { gap: 1.2rem; }
