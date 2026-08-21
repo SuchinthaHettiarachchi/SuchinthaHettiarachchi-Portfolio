@@ -264,6 +264,32 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
       .nav-logo { font-size: 1.1rem; }
       .work-grid { grid-template-columns: 1fr; }
       .work-item.large .work-thumb { aspect-ratio: 16/9; }
+      .loader-initials { font-size: clamp(2rem, 11vw, 4rem); }
+      .loader-track { width: clamp(120px, 60vw, 250px); }
+      .loader-pct { font-size: 0.55rem; letter-spacing: 0.2em; }
+      .about-title { font-size: clamp(2rem, 8vw, 3.5rem); }
+      .about-text { font-size: 0.85rem; }
+      .contact-title { font-size: clamp(2rem, 8vw, 3.5rem); }
+      .contact-email { font-size: 0.65rem; }
+      .contact-socials a { font-size: 0.45rem; letter-spacing: 0.15em; }
+      .work-info h3 { font-size: 0.85rem; }
+      .work-tag { font-size: 0.45rem; padding: 0.2rem 0.5rem; }
+      .stat-n { font-size: 1.8rem; }
+      .stat-l { font-size: 0.45rem; }
+      .sdiv { margin: 0 1.5rem; }
+      #about { padding: 6rem 1.2rem; }
+      #work { padding: 4rem 1.2rem; }
+      #contact { padding: 6rem 1.2rem 1.5rem; }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .hero-btn::before { transition: none; }
+      .work-item { transition: none; }
+      .wt-bg { transition: none; }
+      .work-info h3 { transition: none; }
+      .contact-email { transition: none; }
+      .contact-socials a { transition: none; }
+      .contact-socials a::after { transition: none; }
     }
   </style>
   <div class="loader" id="loader">
