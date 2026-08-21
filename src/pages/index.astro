@@ -210,6 +210,11 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     .footer-line a:hover { color: var(--teal); }
 
     @media (max-width: 768px) {
+      .contact-title { font-size: clamp(2.5rem, 9vw, 5rem); margin-bottom: 1.8rem; }
+      .contact-email { font-size: clamp(0.6rem, 1.4vw, 0.85rem); margin-bottom: 2rem; padding-bottom: 0.4rem; word-break: break-all; }
+      .contact-inner { margin-bottom: 3rem; }
+      .contact-socials a { font-size: 0.5rem; padding: 0.4rem 0; margin-bottom: 0.4rem; }
+      .footer-line { font-size: 0.45rem; padding-top: 1.8rem; }
       .s-label { font-size: 0.5rem; letter-spacing: 0.3em; margin-bottom: 1.8rem; }
       .about-inner { padding-left: 1rem; }
       .about-inner::before { left: -0.5rem; width: 1.5px; }
